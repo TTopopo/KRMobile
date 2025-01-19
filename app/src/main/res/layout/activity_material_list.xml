@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#2E2B36">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="?attr/actionBarTheme"
+        android:elevation="4dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Список расходных материалов"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:padding="16dp"
+        android:background="#333333" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
+        android:background="@android:color/white"
+        android:iconifiedByDefault="false"
+        android:queryHint="Поиск материала" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMaterials"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp" />
+
+    <Button
+        android:id="@+id/button_add_material"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#D5A10F"
+        android:text="Добавить материал" />
+
+</LinearLayout>

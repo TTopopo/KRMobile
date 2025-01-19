@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#2E2B36"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/edit_material_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Изображение"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#898989" />
+
+    <EditText
+        android:id="@+id/edit_material_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Название"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#898989" />
+
+    <EditText
+        android:id="@+id/edit_material_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Описание"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#898989" />
+
+    <EditText
+        android:id="@+id/edit_material_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Цена"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#898989" />
+
+    <EditText
+        android:id="@+id/edit_material_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Категория"
+        android:minHeight="48dp"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#898989" />
+
+    <Button
+        android:id="@+id/update_material_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#D5A10F"
+        android:text="Обновить материал" />
+</LinearLayout>
