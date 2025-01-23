@@ -1,4 +1,3 @@
-// ProfileActivity.kt
 package com.example.krmobil.register
 
 import android.content.Intent
@@ -9,20 +8,32 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
+import com.example.krmobil.products.AdminUserAdapter
 import com.example.krmobil.utils.SharedPreferencesHelper
 
 class ProfileActivity : AppCompatActivity() {
+    private var isAdmin: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // Включаем кнопку "Назад"
+        supportActionBar?.title = ""
 
         val emailTextView: TextView = findViewById(R.id.profile_email)
         val loginTextView: TextView = findViewById(R.id.profile_login)
         val phoneTextView: TextView = findViewById(R.id.profile_phone)
         val adminPanel: Button = findViewById(R.id.profile_admin)
         val history: Button = findViewById(R.id.profile_history)
+        val recyclerView: RecyclerView = findViewById(R.id.profile_items_list)
 
         val userEmail = intent.getStringExtra("useremail") ?: SharedPreferencesHelper.getUserEmail(this)
         if (userEmail == null) {
@@ -34,11 +45,14 @@ class ProfileActivity : AppCompatActivity() {
         val user = dbHelper.getUserByEmail(userEmail)
 
         if (user != null) {
+            isAdmin = user.isAdmin
             emailTextView.text = user.email
             loginTextView.text = user.login
             phoneTextView.text = user.phone
 
-            if (user.isAdmin) {
+            Log.d("ProfileActivity", "User role: ${if (isAdmin) "Admin" else "User"}")
+
+            if (isAdmin) {
                 adminPanel.visibility = View.VISIBLE
                 history.visibility = View.GONE
             } else {
@@ -60,5 +74,15 @@ class ProfileActivity : AppCompatActivity() {
             intent.putExtra("useremail", userEmail)
             startActivity(intent)
         }
+
+        // Установка адаптера для RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapter = AdminUserAdapter(emptyList()) // Используйте ваш адаптер
+        recyclerView.adapter = adapter
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

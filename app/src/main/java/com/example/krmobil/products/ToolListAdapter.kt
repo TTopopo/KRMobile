@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
 import com.example.krmobil.models.Tool
@@ -47,13 +48,10 @@ class ToolListAdapter(private var tools: List<Tool>, private val context: Contex
         holder.description.text = tools[position].description
         holder.price.text = "${tools[position].price} руб."
 
-        val imageId = context.resources.getIdentifier(
-            tools[position].image,
-            "drawable",
-            context.packageName
-        )
-
-        holder.image.setImageResource(if (imageId != 0) imageId else R.drawable.ic_launcher_background)
+        // Загрузка изображения с использованием Glide
+        Glide.with(context)
+            .load(getImageResourceId(tools[position].image)) // Если tools[position].image - это имя ресурса
+            .into(holder.image)
 
         if (isAdmin) {
             holder.edit.visibility = View.VISIBLE
@@ -98,5 +96,9 @@ class ToolListAdapter(private var tools: List<Tool>, private val context: Contex
     private fun getCurrentDate(): String {
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         return sdf.format(Date())
+    }
+
+    private fun getImageResourceId(imageName: String): Int {
+        return context.resources.getIdentifier(imageName, "drawable", context.packageName)
     }
 }

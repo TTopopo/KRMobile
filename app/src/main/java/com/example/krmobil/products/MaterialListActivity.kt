@@ -74,7 +74,15 @@ class MaterialListActivity : AppCompatActivity() {
         return true
     }
 
-    // MaterialListActivity.kt
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (isAdmin) {
+            menu?.findItem(R.id.action_cart)?.isVisible = false
+        } else {
+            menu?.findItem(R.id.action_cart)?.isVisible = true
+        }
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_cart -> {

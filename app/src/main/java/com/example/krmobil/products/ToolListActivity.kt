@@ -1,4 +1,3 @@
-// ToolListActivity.kt
 package com.example.krmobil.products
 
 import android.content.Intent
@@ -74,6 +73,15 @@ class ToolListActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (isAdmin) {
+            menu?.findItem(R.id.action_cart)?.isVisible = false
+        } else {
+            menu?.findItem(R.id.action_cart)?.isVisible = true
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

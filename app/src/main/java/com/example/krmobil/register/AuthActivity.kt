@@ -9,7 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
-import com.example.krmobil.products.CatalogActivity // Импортируйте новую активность
+import com.example.krmobil.products.CatalogActivity
+import com.example.krmobil.utils.SharedPreferencesHelper
 
 class AuthActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,10 +19,8 @@ class AuthActivity : AppCompatActivity() {
         val userEmail: EditText = findViewById(R.id.user_email_auth)
         val userPassword: EditText = findViewById(R.id.user_pass_auth)
         val button: Button = findViewById(R.id.button_auth)
-
         val linkToReg: TextView = findViewById(R.id.link_to_reg)
 
-        // AuthActivity.kt
         button.setOnClickListener {
             val email = userEmail.text.toString().trim()
             val pass = userPassword.text.toString().trim()
@@ -36,6 +35,9 @@ class AuthActivity : AppCompatActivity() {
                     userEmail.text.clear()
                     userPassword.text.clear()
 
+                    // Сохранение email в SharedPreferences
+                    SharedPreferencesHelper.saveUserEmail(this, email)
+
                     // Переход на активность с выбором каталога
                     val intent = Intent(this, CatalogActivity::class.java)
                     intent.putExtra("useremail", email)
@@ -45,7 +47,6 @@ class AuthActivity : AppCompatActivity() {
                 }
             }
         }
-
 
         linkToReg.setOnClickListener {
             val intent = Intent(this, RegActivity::class.java)

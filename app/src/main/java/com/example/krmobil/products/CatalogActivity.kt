@@ -15,6 +15,8 @@ import com.example.krmobil.register.ProfileActivity
 import com.example.krmobil.register.ShoppingCartActivity
 
 class CatalogActivity : AppCompatActivity() {
+    private var isAdmin: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalog)
@@ -30,6 +32,7 @@ class CatalogActivity : AppCompatActivity() {
             val user = dbHelper.getUserByEmail(userEmail)
 
             if (user != null) {
+                isAdmin = user.isAdmin
                 val buttonViewTools: Button = findViewById(R.id.button_view_tools)
                 val buttonViewMaterials: Button = findViewById(R.id.button_view_materials)
 
@@ -63,6 +66,15 @@ class CatalogActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (isAdmin) {
+            menu?.findItem(R.id.action_cart)?.isVisible = false
+        } else {
+            menu?.findItem(R.id.action_cart)?.isVisible = true
+        }
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

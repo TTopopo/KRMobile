@@ -11,14 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
 import com.example.krmobil.models.User
+import com.example.krmobil.utils.SharedPreferencesHelper
 
 class RegActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reg)
-// Открытие базы данных
-        val dbHelper = DBHelper(this, null)
-        val db = dbHelper.writableDatabase
 
         val userLogin: EditText = findViewById(R.id.user_login)
         val userEmail: EditText = findViewById(R.id.user_email)
@@ -39,7 +37,7 @@ class RegActivity : AppCompatActivity() {
                 Toast.makeText(this, "Не все поля заполнены", Toast.LENGTH_LONG).show()
             } else if (pass.length < 8) {
                 Toast.makeText(this, "Пароль должен быть не менее 8 символов", Toast.LENGTH_LONG).show()
-            } else if (phone.length < 11 || phone.length > 11) {
+            } else if (phone.length != 11) {
                 Toast.makeText(this, "Номер телефона должен состоять из 11 цифр", Toast.LENGTH_LONG).show()
             } else {
                 val db = DBHelper(this, null)
@@ -47,6 +45,9 @@ class RegActivity : AppCompatActivity() {
                     val user = User(email, login, phone, pass, isAdmin)
                     db.addUser(user)
                     Toast.makeText(this, "Пользователь $email зарегистрирован", Toast.LENGTH_LONG).show()
+
+                    // Сохранение email в SharedPreferences
+                    SharedPreferencesHelper.saveUserEmail(this, email)
 
                     userPhone.text.clear()
                     userLogin.text.clear()
@@ -63,6 +64,5 @@ class RegActivity : AppCompatActivity() {
             val intent = Intent(this, AuthActivity::class.java)
             startActivity(intent)
         }
-        db.close()
     }
 }
