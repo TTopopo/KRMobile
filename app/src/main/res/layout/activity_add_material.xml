@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#2E2B36"
+    android:background="#F5F5F5"
     android:padding="16dp">
 
     <androidx.appcompat.widget.Toolbar
@@ -27,8 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#D5A10F"
-        android:text="Выбрать изображение" />
+        android:backgroundTint="#FF9800"
+        android:text="Выбрать изображение"
+        android:textColor="#FFFFFF" />
 
     <EditText
         android:id="@+id/add_material_name"
@@ -37,8 +38,9 @@
         android:layout_marginTop="10dp"
         android:hint="Название"
         android:minHeight="48dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#898989" />
+        android:textColor="#000000"
+        android:textColorHint="#898989"
+        android:background="@drawable/edit_text_background" />
 
     <EditText
         android:id="@+id/add_material_description"
@@ -47,8 +49,9 @@
         android:layout_marginTop="10dp"
         android:hint="Описание"
         android:minHeight="48dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#898989" />
+        android:textColor="#000000"
+        android:textColorHint="#898989"
+        android:background="@drawable/edit_text_background" />
 
     <EditText
         android:id="@+id/add_material_price"
@@ -58,8 +61,9 @@
         android:hint="Цена"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#898989" />
+        android:textColor="#000000"
+        android:textColorHint="#898989"
+        android:background="@drawable/edit_text_background" />
 
     <EditText
         android:id="@+id/add_material_category"
@@ -68,14 +72,16 @@
         android:layout_marginTop="10dp"
         android:hint="Категория"
         android:minHeight="48dp"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#898989" />
+        android:textColor="#000000"
+        android:textColorHint="#898989"
+        android:background="@drawable/edit_text_background" />
 
     <Button
         android:id="@+id/add_material_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#D5A10F"
-        android:text="Добавить материал" />
+        android:backgroundTint="#FF9800"
+        android:text="Добавить материал"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

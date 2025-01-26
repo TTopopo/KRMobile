@@ -4,15 +4,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#2E2B36">
+    android:background="#F5F5F5">
 
     <ImageView
         android:id="@+id/item_list_image"
         android:layout_width="match_parent"
         android:layout_height="328dp"
-    android:layout_marginTop="10dp"
-    android:scaleType="fitCenter"
-    android:src="@drawable/ic_launcher_background" />
+        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/item_list_name"
@@ -22,7 +22,7 @@
         android:paddingVertical="10dp"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:text="Название материала"/>
 
     <TextView
@@ -33,7 +33,7 @@
         android:paddingVertical="10dp"
         android:textSize="17dp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:text="Описание материала"/>
 
     <TextView
@@ -44,7 +44,7 @@
         android:paddingVertical="10dp"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:gravity="end"
         android:text="Цена"/>
 
@@ -59,21 +59,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#D5A10F"
+            android:backgroundTint="#FF9800"
             android:gravity="center"
             android:hint="Количество"
             android:inputType="number"
             android:minHeight="48dp"
             android:text="1"
             android:textAlignment="center"
-            android:textColor="#FFFFFF" />
+            android:textColor="#000000" />
 
         <Button
             android:id="@+id/button_buy"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="#D5A10F"
+            android:backgroundTint="#FF9800"
             android:text="Купить"
             android:textColor="#FFFFFF"/>
     </LinearLayout>

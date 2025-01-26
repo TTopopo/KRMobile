@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#2E2B36"
+    android:background="#F5F5F5"
     android:padding="16dp">
 
     <androidx.appcompat.widget.Toolbar
@@ -24,10 +24,10 @@
             android:id="@+id/inform"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#333333"
+            android:background="#E0E0E0"
             android:padding="16dp"
             android:text="Текущий пользователь"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="24sp"/>
     </LinearLayout>
 
@@ -38,7 +38,7 @@
         android:paddingHorizontal="10dp"
         android:paddingVertical="10dp"
         android:textSize="20dp"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:text="Email" />
 
     <TextView
@@ -48,7 +48,7 @@
         android:paddingHorizontal="10dp"
         android:paddingVertical="10dp"
         android:text="Login"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="20dp" />
 
     <TextView
@@ -58,7 +58,7 @@
         android:paddingHorizontal="10dp"
         android:paddingVertical="10dp"
         android:text="Phone"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="20dp" />
 
     <Button
@@ -67,8 +67,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#D5A10F"
-        android:text="История покупок" />
+        android:backgroundTint="#FF9800"
+        android:text="История покупок"
+        android:textColor="#FFFFFF" />
 
     <Button
         android:id="@+id/profile_admin"
@@ -76,8 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#D5A10F"
-        android:text="Панель администратора" />
+        android:backgroundTint="#FF9800"
+        android:text="Панель администратора"
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/profile_no_items"

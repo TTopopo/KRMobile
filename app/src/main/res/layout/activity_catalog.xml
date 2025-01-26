@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#201E28"
+    android:background="#F5F5F5"
     android:padding="16dp">
 
     <androidx.appcompat.widget.Toolbar
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Каталог товаров"
-        android:textColor="#fdfdfd"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp" />
@@ -30,9 +30,9 @@
         android:text="Просмотреть список инструментов"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#FFEB3B"/>
+        android:backgroundTint="#FF9800"/>
 
     <Button
         android:id="@+id/button_view_materials"
@@ -41,8 +41,8 @@
         android:text="Просмотреть список расходных материалов"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:layout_marginTop="20dp"
-        android:backgroundTint="#FFEB3B"/>
+        android:backgroundTint="#FF9800"/>
 
 </LinearLayout>

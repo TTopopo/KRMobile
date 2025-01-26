@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FFFFFF">
 
     <ImageView
         android:id="@+id/cart_item_image"
@@ -19,7 +20,8 @@
         android:text="Название товара"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:paddingTop="8dp" />
+        android:paddingTop="8dp"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/cart_item_price"
@@ -27,7 +29,8 @@
         android:layout_height="wrap_content"
         android:text="Цена"
         android:textSize="16sp"
-        android:paddingTop="4dp" />
+        android:paddingTop="4dp"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/cart_item_quantity"
@@ -35,7 +38,8 @@
         android:layout_height="wrap_content"
         android:text="Количество: "
         android:textSize="16sp"
-        android:paddingTop="4dp" />
+        android:paddingTop="4dp"
+        android:textColor="#000000" />
 
     <EditText
         android:id="@+id/cart_item_comment"
@@ -43,12 +47,16 @@
         android:layout_height="wrap_content"
         android:hint="Добавьте комментарий"
         android:paddingTop="8dp"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:background="@drawable/edit_text_background"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/cart_item_submit_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Отправить комментарий"
-        android:paddingTop="8dp" />
+        android:paddingTop="8dp"
+        android:backgroundTint="#FF9800"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

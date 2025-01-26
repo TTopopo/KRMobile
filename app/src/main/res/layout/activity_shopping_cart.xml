@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#F5F5F5">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -20,8 +21,8 @@
         android:layout_height="wrap_content"
         android:text="Товары"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingTop="16dp" />
+        android:paddingTop="16dp"
+        android:textColor="#000000" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCart"

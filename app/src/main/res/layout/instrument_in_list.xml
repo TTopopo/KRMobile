@@ -6,7 +6,7 @@
     android:layout_margin="8dp"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp"
-    card_view:cardBackgroundColor="#2E2B36">
+    card_view:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             android:text="Название инструмента"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -40,7 +40,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             android:text="Описание инструмента"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="17dp"
             android:textStyle="bold" />
 
@@ -52,7 +52,7 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
             android:text="Цена"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -67,21 +67,21 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#D5A10F"
+                android:backgroundTint="#FF9800"
                 android:gravity="center"
                 android:hint="Количество"
                 android:inputType="number"
                 android:minHeight="48dp"
                 android:text="1"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF" />
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/button_buy"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#D5A10F"
+                android:backgroundTint="#FF9800"
                 android:text="Купить"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

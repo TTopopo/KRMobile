@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#2E2B36">
+    android:background="#F5F5F5">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,9 +19,9 @@
         android:layout_height="wrap_content"
         android:text="История моих покупок"
         android:textSize="24sp"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:padding="16dp"
-        android:background="#333333" />
+        android:background="#E0E0E0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPurchaseHistory"
