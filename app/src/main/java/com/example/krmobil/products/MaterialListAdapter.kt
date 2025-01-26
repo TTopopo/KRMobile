@@ -45,12 +45,13 @@ class MaterialListAdapter(private var materials: List<Material>, private val con
     }
 
     override fun onBindViewHolder(holder: MaterialViewHolder, position: Int) {
-        holder.name.text = materials[position].name
-        holder.description.text = materials[position].description
-        holder.price.text = "${materials[position].price} руб."
+        val material = materials[position]
+        holder.name.text = material.name
+        holder.description.text = material.description
+        holder.price.text = "${material.price} руб."
 
         val imageId = context.resources.getIdentifier(
-            materials[position].image,
+            material.image,
             "drawable",
             context.packageName
         )
@@ -66,14 +67,14 @@ class MaterialListAdapter(private var materials: List<Material>, private val con
 
             holder.edit.setOnClickListener {
                 val intent = Intent(context, EditMaterialActivity::class.java)
-                intent.putExtra("materialId", materials[position].id)
+                intent.putExtra("materialId", material.id)
                 context.startActivity(intent)
             }
 
             holder.delete.setOnClickListener {
                 val dbHelper = DBHelper(context, null)
-                dbHelper.deleteMaterial(materials[position].id)
-                materials = materials.filter { it.id != materials[position].id }
+                dbHelper.deleteMaterial(material.id)
+                materials = materials.filter { it.id != material.id }
                 notifyDataSetChanged()
             }
         } else {
@@ -87,23 +88,22 @@ class MaterialListAdapter(private var materials: List<Material>, private val con
                 val quantity = holder.quantityEditText.text.toString().toIntOrNull() ?: 1
                 val dbHelper = DBHelper(context, null)
                 val saleId = dbHelper.addSale(
-                    materials[position].id,
+                    material.id,
                     "material",
-                    materials[position].name,
-                    materials[position].image,
-                    materials[position].description,
-                    materials[position].price,
+                    material.name,
+                    material.image,
+                    material.description,
+                    material.price,
                     quantity,
                     getCurrentDate()
                 )
-                Toast.makeText(context, "Вы купили ${materials[position].name} в количестве $quantity штук", Toast.LENGTH_SHORT).show()
-                Log.d("MaterialListAdapter", "Buy button clicked for material: ${materials[position].name}, quantity: $quantity")
+                Toast.makeText(context, "Вы купили ${material.name} в количестве $quantity штук", Toast.LENGTH_SHORT).show()
+                Log.d("MaterialListAdapter", "Buy button clicked for material: ${material.name}, quantity: $quantity")
             }
-
 
             holder.reviews.setOnClickListener {
                 val intent = Intent(context, ReviewsActivity::class.java)
-                intent.putExtra("itemId", materials[position].id)
+                intent.putExtra("itemId", material.id)
                 intent.putExtra("itemType", "material")
                 context.startActivity(intent)
             }

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
-import com.example.krmobil.register.ProfileActivity
+import com.example.krmobil.utils.SharedPreferencesHelper
 
 class ShoppingCartActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -30,16 +30,10 @@ class ShoppingCartActivity : AppCompatActivity() {
         dbHelper = DBHelper(this, null)
 
         val sales = dbHelper.getSales()
-        val userNickname = getUserNickname() // Получаем никнейм пользователя
-        cartAdapter = CartAdapter(sales, this, userNickname)
+        val userLogin = SharedPreferencesHelper.getUserLogin(this) ?: "default_login" // Получаем логин пользователя
+        cartAdapter = CartAdapter(sales, this, userLogin)
         recyclerView.adapter = cartAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun getUserNickname(): String {
-        // Здесь вы должны получить никнейм текущего пользователя
-        // Это может быть из SharedPreferences, базы данных или другого источника
-        return "UserNickname" // Замените на реальный никнейм пользователя
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -23,7 +23,7 @@ class DBHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val queryMaterials = "CREATE TABLE materials (id INTEGER PRIMARY KEY AUTOINCREMENT, image TEXT, name TEXT, description TEXT, price REAL, category TEXT)"
         val queryUsers = "CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, login TEXT, phone TEXT, pass TEXT, is_admin INTEGER)"
         val querySales = "CREATE TABLE sales (id INTEGER PRIMARY KEY AUTOINCREMENT, item_id INTEGER, item_type TEXT, item_name TEXT, item_image TEXT, item_description TEXT, price REAL, quantity INTEGER, sale_date TEXT, FOREIGN KEY(item_id) REFERENCES tools(id) ON DELETE CASCADE, FOREIGN KEY(item_id) REFERENCES materials(id) ON DELETE CASCADE)"
-        val queryComments = "CREATE TABLE comments (id INTEGER PRIMARY KEY AUTOINCREMENT, sale_id INTEGER, comment TEXT, FOREIGN KEY(sale_id) REFERENCES sales(id) ON DELETE CASCADE)"
+        val queryComments = "CREATE TABLE comments (id INTEGER PRIMARY KEY AUTOINCREMENT, sale_id INTEGER, user_login TEXT, comment TEXT, FOREIGN KEY(sale_id) REFERENCES sales(id) ON DELETE CASCADE)"
         db!!.execSQL(queryTools)
         db.execSQL(queryMaterials)
         db.execSQL(queryUsers)
@@ -47,8 +47,8 @@ class DBHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?) :
     }
 
     private fun updateCommentsTable(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE comments_new (id INTEGER PRIMARY KEY AUTOINCREMENT, sale_id INTEGER, comment TEXT, FOREIGN KEY(sale_id) REFERENCES sales(id) ON DELETE CASCADE)")
-        db.execSQL("INSERT INTO comments_new (sale_id, comment) SELECT sale_id, comment FROM comments")
+        db.execSQL("CREATE TABLE comments_new (id INTEGER PRIMARY KEY AUTOINCREMENT, sale_id INTEGER, user_login TEXT, comment TEXT, FOREIGN KEY(sale_id) REFERENCES sales(id) ON DELETE CASCADE)")
+        db.execSQL("INSERT INTO comments_new (sale_id, user_login, comment) SELECT sale_id, user_login, comment FROM comments")
         db.execSQL("DROP TABLE comments")
         db.execSQL("ALTER TABLE comments_new RENAME TO comments")
     }
@@ -387,32 +387,38 @@ class DBHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?) :
         return sales
     }
 
-    fun addComment(saleId: Int, comment: String) {
+    fun addComment(saleId: Int, userLogin: String, comment: String) {
         val db = this.writableDatabase
         val values = ContentValues().apply {
             put("sale_id", saleId)
+            put("user_login", userLogin)
             put("comment", comment)
         }
         db.insert("comments", null, values)
         db.close()
     }
 
-    fun getCommentsBySaleId(saleId: Int): List<Comment> {
+    fun getCommentsByItemIdAndType(itemId: Int, itemType: String): List<Comment> {
         val db = this.readableDatabase
-        val query = "SELECT * FROM comments WHERE sale_id = ?"
-        val result = db.rawQuery(query, arrayOf(saleId.toString()))
+        val query = "SELECT comments.id, comments.sale_id, users.login AS user_login, comments.comment " +
+                "FROM comments JOIN sales ON comments.sale_id = sales.id " +
+                "JOIN users ON comments.user_login = users.login " +
+                "WHERE sales.item_id = ? AND sales.item_type = ?"
+        val result = db.rawQuery(query, arrayOf(itemId.toString(), itemType))
         val comments = mutableListOf<Comment>()
 
         val idIndex = result.getColumnIndex("id")
         val saleIdIndex = result.getColumnIndex("sale_id")
+        val userLoginIndex = result.getColumnIndex("user_login")
         val commentIndex = result.getColumnIndex("comment")
 
-        if (idIndex != -1 && saleIdIndex != -1 && commentIndex != -1) {
+        if (idIndex != -1 && saleIdIndex != -1 && userLoginIndex != -1 && commentIndex != -1) {
             if (result.moveToFirst()) {
                 do {
                     val comment = Comment(
                         result.getInt(idIndex),
                         result.getInt(saleIdIndex),
+                        result.getString(userLoginIndex),
                         result.getString(commentIndex)
                     )
                     comments.add(comment)
@@ -426,5 +432,4 @@ class DBHelper(val context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
         return comments
     }
-
 }

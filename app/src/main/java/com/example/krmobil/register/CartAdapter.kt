@@ -25,6 +25,7 @@ class CartAdapter(
         val image: ImageView = view.findViewById(R.id.cart_item_image)
         val name: TextView = view.findViewById(R.id.cart_item_name)
         val price: TextView = view.findViewById(R.id.cart_item_price)
+        val quantity: TextView = view.findViewById(R.id.cart_item_quantity) // Добавьте TextView для количества
         val comment: EditText = view.findViewById(R.id.cart_item_comment)
         val submitComment: Button = view.findViewById(R.id.cart_item_submit_comment)
     }
@@ -42,6 +43,7 @@ class CartAdapter(
         val sale = sales[position]
         holder.name.text = sale.itemName
         holder.price.text = "Цена: ${sale.price} руб."
+        holder.quantity.text = "Количество: ${sale.quantity}" // Установите количество
 
         // Загрузка изображения с использованием Glide
         Glide.with(context)
@@ -52,7 +54,7 @@ class CartAdapter(
             val comment = holder.comment.text.toString()
             if (comment.isNotEmpty()) {
                 val dbHelper = DBHelper(context, null)
-                dbHelper.addComment(sale.id, comment) // Убираем userLogin
+                dbHelper.addComment(sale.id, userLogin, comment) // Передаем userLogin
                 Toast.makeText(context, "Комментарий отправлен", Toast.LENGTH_SHORT).show()
                 holder.comment.setText("")
             } else {

@@ -17,7 +17,11 @@ import com.example.krmobil.dbhelper.DBHelper
 import com.example.krmobil.models.Tool
 import com.example.krmobil.register.AddToolActivity
 import com.example.krmobil.register.ProfileActivity
+import com.example.krmobil.register.ReviewsActivity
 import com.example.krmobil.register.ShoppingCartActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ToolListActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView

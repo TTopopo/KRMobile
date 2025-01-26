@@ -27,7 +27,7 @@ class ReviewsAdapter(private var comments: List<Comment>, private val context: C
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         val comment = comments[position]
-        holder.username.text = "User${comment.id}" // Замените на реальный никнейм пользователя
+        holder.username.text = comment.userLogin // Отображаем логин пользователя
         holder.commentText.text = comment.comment
     }
 
@@ -36,3 +36,4 @@ class ReviewsAdapter(private var comments: List<Comment>, private val context: C
         notifyDataSetChanged()
     }
 }
+

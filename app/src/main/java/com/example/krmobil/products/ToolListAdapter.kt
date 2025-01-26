@@ -106,7 +106,6 @@ class ToolListAdapter(private var tools: List<Tool>, private val context: Contex
                 }
             }
 
-
             // Обработка нажатия на кнопку "Отзывы"
             holder.reviews.setOnClickListener {
                 val intent = Intent(context, ReviewsActivity::class.java)

@@ -35,8 +35,13 @@ class AuthActivity : AppCompatActivity() {
                     userEmail.text.clear()
                     userPassword.text.clear()
 
-                    // Сохранение email в SharedPreferences
+                    // Получение логина пользователя из базы данных
+                    val user = db.getUserByEmail(email)
+                    val userLogin = user?.login ?: "default_login"
+
+                    // Сохранение email и логина в SharedPreferences
                     SharedPreferencesHelper.saveUserEmail(this, email)
+                    SharedPreferencesHelper.saveUserLogin(this, userLogin)
 
                     // Переход на активность с выбором каталога
                     val intent = Intent(this, CatalogActivity::class.java)
