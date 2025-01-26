@@ -16,6 +16,7 @@ import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
 import com.example.krmobil.models.Material
 import com.example.krmobil.register.EditMaterialActivity
+import com.example.krmobil.register.ReviewsActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -31,6 +32,7 @@ class MaterialListAdapter(private var materials: List<Material>, private val con
         val delete: Button = view.findViewById(R.id.item_list_delete_button)
         val buy: Button = view.findViewById(R.id.button_buy)
         val quantityEditText: EditText = view.findViewById(R.id.quantity_edit_text)
+        val reviews: Button = view.findViewById(R.id.item_list_reviews_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MaterialViewHolder {
@@ -60,6 +62,7 @@ class MaterialListAdapter(private var materials: List<Material>, private val con
             holder.delete.visibility = View.VISIBLE
             holder.buy.visibility = View.GONE
             holder.quantityEditText.visibility = View.GONE
+            holder.reviews.visibility = View.GONE
 
             holder.edit.setOnClickListener {
                 val intent = Intent(context, EditMaterialActivity::class.java)
@@ -78,13 +81,31 @@ class MaterialListAdapter(private var materials: List<Material>, private val con
             holder.delete.visibility = View.GONE
             holder.buy.visibility = View.VISIBLE
             holder.quantityEditText.visibility = View.VISIBLE
+            holder.reviews.visibility = View.VISIBLE
 
             holder.buy.setOnClickListener {
                 val quantity = holder.quantityEditText.text.toString().toIntOrNull() ?: 1
                 val dbHelper = DBHelper(context, null)
-                dbHelper.addSale(materials[position].id, "material", quantity, getCurrentDate())
+                val saleId = dbHelper.addSale(
+                    materials[position].id,
+                    "material",
+                    materials[position].name,
+                    materials[position].image,
+                    materials[position].description,
+                    materials[position].price,
+                    quantity,
+                    getCurrentDate()
+                )
                 Toast.makeText(context, "Вы купили ${materials[position].name} в количестве $quantity штук", Toast.LENGTH_SHORT).show()
                 Log.d("MaterialListAdapter", "Buy button clicked for material: ${materials[position].name}, quantity: $quantity")
+            }
+
+
+            holder.reviews.setOnClickListener {
+                val intent = Intent(context, ReviewsActivity::class.java)
+                intent.putExtra("itemId", materials[position].id)
+                intent.putExtra("itemType", "material")
+                context.startActivity(intent)
             }
         }
     }

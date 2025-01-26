@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -49,6 +51,17 @@ class AddToolActivity : AppCompatActivity() {
         addToolButton.setOnClickListener {
             addTool()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val userRole = getUserRole() // Метод для получения роли пользователя
+        Log.d("AddToolActivity", "User role: $userRole")
+        if (userRole == "admin") {
+            menuInflater.inflate(R.menu.menu_admin, menu)
+        } else if (userRole == "user") {
+            menuInflater.inflate(R.menu.menu_user, menu)
+        }
+        return true
     }
 
     private fun selectImage() {
@@ -100,5 +113,12 @@ class AddToolActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    private fun getUserRole(): String {
+        // Реализуйте логику для получения роли пользователя
+        // Например, из SharedPreferences или базы данных
+        // Для примера возвращаем "admin"
+        return "admin" // По умолчанию возвращаем "admin" для тестирования
     }
 }

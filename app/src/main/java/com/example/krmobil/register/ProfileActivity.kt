@@ -3,6 +3,8 @@ package com.example.krmobil.register
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
 import com.example.krmobil.products.AdminUserAdapter
+import com.example.krmobil.register.ShoppingCartActivity
 import com.example.krmobil.utils.SharedPreferencesHelper
 
 class ProfileActivity : AppCompatActivity() {
@@ -79,6 +82,34 @@ class ProfileActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = AdminUserAdapter(emptyList()) // Используйте ваш адаптер
         recyclerView.adapter = adapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        if (isAdmin) {
+            menuInflater.inflate(R.menu.menu_admin, menu)
+        } else {
+            menuInflater.inflate(R.menu.menu_user, menu)
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_cart -> {
+                val intent = Intent(this, ShoppingCartActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+            R.id.action_profile -> {
+                // Здесь можно добавить логику для обработки нажатия на профиль, если необходимо
+                return true
+            }
+            android.R.id.home -> { // Обработка нажатия на кнопку "Назад"
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

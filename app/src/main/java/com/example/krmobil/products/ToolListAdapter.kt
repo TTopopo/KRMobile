@@ -17,6 +17,7 @@ import com.example.krmobil.R
 import com.example.krmobil.dbhelper.DBHelper
 import com.example.krmobil.models.Tool
 import com.example.krmobil.register.EditToolActivity
+import com.example.krmobil.register.ReviewsActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -32,6 +33,7 @@ class ToolListAdapter(private var tools: List<Tool>, private val context: Contex
         val delete: Button = view.findViewById(R.id.item_list_delete_button)
         val buy: Button = view.findViewById(R.id.button_buy)
         val quantityEditText: EditText = view.findViewById(R.id.quantity_edit_text)
+        val reviews: Button = view.findViewById(R.id.item_list_reviews_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToolViewHolder {
@@ -44,13 +46,14 @@ class ToolListAdapter(private var tools: List<Tool>, private val context: Contex
     }
 
     override fun onBindViewHolder(holder: ToolViewHolder, position: Int) {
-        holder.name.text = tools[position].name
-        holder.description.text = tools[position].description
-        holder.price.text = "${tools[position].price} руб."
+        val tool = tools[position]
+        holder.name.text = tool.name
+        holder.description.text = tool.description
+        holder.price.text = context.getString(R.string.item_price, tool.price)
 
         // Загрузка изображения с использованием Glide
         Glide.with(context)
-            .load(getImageResourceId(tools[position].image)) // Если tools[position].image - это имя ресурса
+            .load(getImageResourceId(tool.image)) // Если tool.image - это имя ресурса
             .into(holder.image)
 
         if (isAdmin) {
@@ -58,17 +61,18 @@ class ToolListAdapter(private var tools: List<Tool>, private val context: Contex
             holder.delete.visibility = View.VISIBLE
             holder.buy.visibility = View.GONE
             holder.quantityEditText.visibility = View.GONE
+            holder.reviews.visibility = View.GONE
 
             holder.edit.setOnClickListener {
                 val intent = Intent(context, EditToolActivity::class.java)
-                intent.putExtra("toolId", tools[position].id)
+                intent.putExtra("toolId", tool.id)
                 context.startActivity(intent)
             }
 
             holder.delete.setOnClickListener {
                 val dbHelper = DBHelper(context, null)
-                dbHelper.deleteTool(tools[position].id)
-                tools = tools.filter { it.id != tools[position].id }
+                dbHelper.deleteTool(tool.id)
+                tools = tools.filter { it.id != tool.id }
                 notifyDataSetChanged()
             }
         } else {
@@ -76,13 +80,38 @@ class ToolListAdapter(private var tools: List<Tool>, private val context: Contex
             holder.delete.visibility = View.GONE
             holder.buy.visibility = View.VISIBLE
             holder.quantityEditText.visibility = View.VISIBLE
+            holder.reviews.visibility = View.VISIBLE
 
             holder.buy.setOnClickListener {
                 val quantity = holder.quantityEditText.text.toString().toIntOrNull() ?: 1
                 val dbHelper = DBHelper(context, null)
-                dbHelper.addSale(tools[position].id, "tool", quantity, getCurrentDate())
-                Toast.makeText(context, "Вы купили ${tools[position].name} в количестве $quantity штук", Toast.LENGTH_SHORT).show()
-                Log.d("ToolListAdapter", "Buy button clicked for tool: ${tools[position].name}, quantity: $quantity")
+                val saleId = dbHelper.addSale(
+                    tool.id,
+                    "tool",
+                    tool.name,
+                    tool.image,
+                    tool.description,
+                    tool.price,
+                    quantity,
+                    getCurrentDate()
+                )
+                Toast.makeText(context, context.getString(R.string.buy_message, tool.name, quantity), Toast.LENGTH_SHORT).show()
+                Log.d("ToolListAdapter", "Buy button clicked for tool: ${tool.name}, quantity: $quantity")
+
+                // Передаем saleId в Intent для кнопки "Отзывы"
+                holder.reviews.setOnClickListener {
+                    val intent = Intent(context, ReviewsActivity::class.java)
+                    intent.putExtra("saleId", saleId)
+                    context.startActivity(intent)
+                }
+            }
+
+
+            // Обработка нажатия на кнопку "Отзывы"
+            holder.reviews.setOnClickListener {
+                val intent = Intent(context, ReviewsActivity::class.java)
+                intent.putExtra("saleId", tool.id) // Передаем saleId
+                context.startActivity(intent)
             }
         }
     }

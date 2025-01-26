@@ -70,17 +70,12 @@ class MaterialListActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (isAdmin) {
-            menu?.findItem(R.id.action_cart)?.isVisible = false
+            menuInflater.inflate(R.menu.menu_admin, menu)
         } else {
-            menu?.findItem(R.id.action_cart)?.isVisible = true
+            menuInflater.inflate(R.menu.menu_user, menu)
         }
-        return super.onPrepareOptionsMenu(menu)
+        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

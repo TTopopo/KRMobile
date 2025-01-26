@@ -18,7 +18,7 @@
         android:id="@+id/user_item_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textColor="#FFFFFF"
         android:text="Login"/>
 
@@ -26,7 +26,7 @@
         android:id="@+id/user_item_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textColor="#FFFFFF"
         android:text="Phone"/>
 
@@ -34,7 +34,7 @@
         android:id="@+id/user_item_is_admin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textColor="#FFFFFF"
         android:text="Role"/>
 </LinearLayout>

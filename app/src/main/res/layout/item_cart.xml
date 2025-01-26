@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/cart_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/cart_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Название товара"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:paddingTop="8dp" />
+
+    <TextView
+        android:id="@+id/cart_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Цена"
+        android:textSize="16sp"
+        android:paddingTop="4dp" />
+
+    <EditText
+        android:id="@+id/cart_item_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Добавьте комментарий"
+        android:paddingTop="8dp"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/cart_item_submit_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отправить комментарий"
+        android:paddingTop="8dp" />
+</LinearLayout>

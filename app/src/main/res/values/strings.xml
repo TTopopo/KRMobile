@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KRMobil</string>
+    <string name="item_price">Цена: %1$.2f</string>
+    <string name="buy_message">Вы купили %1$s, количество: %2$d</string>
 </resources>

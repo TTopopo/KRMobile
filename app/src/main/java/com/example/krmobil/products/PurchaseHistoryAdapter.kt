@@ -1,4 +1,3 @@
-// PurchaseHistoryAdapter.kt
 package com.example.krmobil.products
 
 import android.view.LayoutInflater
@@ -13,6 +12,8 @@ class PurchaseHistoryAdapter(private var sales: List<Sale>) : RecyclerView.Adapt
 
     class SaleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val itemName: TextView = itemView.findViewById(R.id.sale_item_name)
+        val itemDescription: TextView = itemView.findViewById(R.id.sale_item_description)
+        val itemPrice: TextView = itemView.findViewById(R.id.sale_item_price)
         val quantity: TextView = itemView.findViewById(R.id.sale_item_quantity)
         val saleDate: TextView = itemView.findViewById(R.id.sale_item_saledate)
     }
@@ -24,9 +25,11 @@ class PurchaseHistoryAdapter(private var sales: List<Sale>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: SaleViewHolder, position: Int) {
         val sale = sales[position]
-        holder.itemName.text = sale.itemType // Можно добавить логику для получения имени товара по itemId и itemType
-        holder.quantity.text = sale.quantity.toString()
-        holder.saleDate.text = sale.saleDate
+        holder.itemName.text = sale.itemName
+        holder.itemDescription.text = "Описание: ${sale.itemDescription}"
+        holder.itemPrice.text = "Цена: ${sale.price} руб."
+        holder.quantity.text = "Количество: ${sale.quantity}"
+        holder.saleDate.text = "Дата: ${sale.saleDate}"
     }
 
     override fun getItemCount(): Int {

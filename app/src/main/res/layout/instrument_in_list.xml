@@ -86,6 +86,14 @@
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
+        <Button
+            android:id="@+id/item_list_reviews_button"
+            android:layout_width="292dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#007BFF"
+            android:text="Отзывы"
+            android:textColor="#FFFFFF" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

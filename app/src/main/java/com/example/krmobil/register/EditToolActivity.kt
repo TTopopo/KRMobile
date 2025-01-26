@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.view.Menu
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -70,6 +72,17 @@ class EditToolActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val userRole = getUserRole() // Метод для получения роли пользователя
+        Log.d("EditToolActivity", "User role: $userRole")
+        if (userRole == "admin") {
+            menuInflater.inflate(R.menu.menu_admin, menu)
+        } else if (userRole == "user") {
+            menuInflater.inflate(R.menu.menu_user, menu)
+        }
+        return true
+    }
+
     private fun selectImage() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, 1)
@@ -123,5 +136,11 @@ class EditToolActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    private fun getUserRole(): String {
+        // Реализуйте логику для получения роли пользователя
+        // Например, из SharedPreferences или базы данных
+        return "admin" // По умолчанию возвращаем "admin" для тестирования
     }
 }
